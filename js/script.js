@@ -4,6 +4,18 @@ function input(input){
     document.getElementById("textview").innerHTML = nilai;
 }
 
+function negatifNumber() {
+    let nilai = document.getElementById("textview").innerHTML;
+    nilai = nilai * -1;
+    document.getElementById("textview").innerHTML = nilai;
+}
+
+function percent() {
+    let nilai = document.getElementById("textview").innerHTML;
+    nilai = nilai / 100;
+    document.getElementById("textview").innerHTML = nilai;
+}
+
 function hasil(){
     let nilai = document.getElementById("textview").innerHTML;
     if(nilai != "" ){
