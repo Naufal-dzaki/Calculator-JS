@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <title>Calculator on/off</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
         body {
-            background-color: #161622;
+            background-color: #0f0f18;
+            transition: .15s ease;
         }
 
         .custom-style-container{
@@ -19,11 +20,17 @@
             z-index: 3;
         }
 
+        .custom-switch {
+            top: 5px;
+            right: 5px;
+            z-index: 5;
+        }
+
         .custom-btn{
             background: transparent;
         }
 
-        .custom-btn:hover {
+        .enableds:hover {
             background: rgba(255, 255, 255, .05);
         }
 
@@ -31,24 +38,68 @@
             background: rgba(255, 255, 255, .03);
         }
 
-        .custom-shape1{
+        
+        /* on/off mode */
+        .enabled-body{
+            background-color: #161622;
+        }
+        button {
+            transition: .3s ease;
+        }
+
+        #onOff-shape .shape-1 {
+            transition: 2s ease;
+        }
+
+        #onOff-shape .shape-2 {
+            transition: 2s ease;
+        }
+        
+        .enableds {
+            color: rgba(255, 255, 255, .5);
+        }
+        
+        .disableds{
+            color: rgba(255, 255, 255, .1);
+            /* cursor: not-allowed; */
+        }
+        
+        .disableds-shape-1 {
+            width: 200px;
+            height: 200px;
+            z-index: 2;
+            background: linear-gradient(rgba(255, 255, 255, .05), rgba(255, 255, 255, .1));
+            bottom: 5%;
+            right: 32%;
+        }
+        
+        .disableds-shape-2{
+            width: 200px;
+            height: 200px;
+            z-index: 2;
+            background: linear-gradient(rgba(255, 255, 255, .05), rgba(255, 255, 255, .1));
+            top: 5%;
+            left: 30%;
+        }
+
+        .enableds-shape-1{
             width: 200px;
             height: 200px;
             z-index: 2;
             background: linear-gradient(#7E08EC, #D82FFE);
             bottom: 5%;
             right: 32%;
-            animation: spin 40s linear 0s infinite reverse;
+            animation: spin 20s linear 0s infinite reverse;
         }
 
-        .custom-shape2{
+        .enableds-shape-2{
             width: 200px;
             height: 200px;
             z-index: 2;
             background: linear-gradient(#742785 , #C062C0);
             top: 5%;
             left: 30%;
-            animation: spin 40s linear 0s infinite reverse;
+            animation: spin 20s linear 0s infinite reverse;
         }
 
         /* animation */
@@ -63,38 +114,44 @@
     </style>
 </head>
 <body>
+    <!-- custom-shape1 -->
+    <div id="onOff-shape">
+        <div class="custom-circle disableds-shape-1 rounded-circle position-absolute shape-1"></div>
+        <div class="custom-circle disableds-shape-2 rounded-circle position-absolute shape-2"></div>
+    </div>
 
-    <div class="custom-circle custom-shape1 rounded-circle position-absolute"></div>
-    <div class="custom-circle custom-shape2 rounded-circle position-absolute"></div>
-
-    <div class="container row position-absolute top-50 start-50 translate-middle custom-style-container rounded-1 p-0" style="max-width: 320px;">
+    <div class="container row position-absolute top-50 start-50 translate-middle custom-style-container rounded-1 p-0" id="onOff" style="max-width: 320px;">
         
+        <div class="form-check form-switch bg-transparent position-absolute custom-container-switch">
+            <input class="form-check-input position-absolute custom-switch" type="checkbox" role="switch" id="checkme">
+        </div>
+
         <div class="col-12 border-0 custom-textview d-flex py-4 text-white-50 fw-bold fs-4" id="textview" style="height: 120px;"></div>
 
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="clean()">C</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 text-white-50 custom-btn" onclick="backspace()">&larr;</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 text-white-50 custom-btn" onclick="negatifNumber()">&plusmn;</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 text-white-50 custom-btn" onclick="percent()">%</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="clean()">C</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 disableds custom-btn" disabled onclick="backspace()">&larr;</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 disableds custom-btn" disabled onclick="negatifNumber()">&plusmn;</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 disableds custom-btn" disabled onclick="percent()">%</button>
         
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(7)">7</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(8)">8</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(9)">9</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 text-white-50 custom-btn" onclick="input(' / ')">&divide;</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(7)">7</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(8)">8</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(9)">9</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 disableds custom-btn" disabled onclick="input(' / ')">&divide;</button>
         
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(4)">4</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(5)">5</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(6)">6</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 text-white-50 custom-btn" onclick="input(' * ')">&times;</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(4)">4</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(5)">5</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(6)">6</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 disableds custom-btn" disabled onclick="input(' * ')">&times;</button>
         
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(1)">1</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(2)">2</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(3)">3</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 text-white-50 custom-btn" onclick="input(' - ')">-</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(1)">1</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(2)">2</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(3)">3</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 disableds custom-btn" disabled onclick="input(' - ')">-</button>
         
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn"  onclick="input('.')">,</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn"  onclick="input(0)">0</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 text-white-50 custom-btn"  onclick="hasil()">=</button>
-        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 text-white-50 custom-btn" onclick="input(' + ')">+</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled  onclick="input('.')">,</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled  onclick="input(0)">0</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-4 disableds custom-btn" disabled  onclick="hasil()">=</button>
+        <button class="col-3 m-0 border-0 p-4 fw-bold fs-5 disableds custom-btn" disabled onclick="input(' + ')">+</button>
     </div>
 
     <script src="js/script.js"></script>

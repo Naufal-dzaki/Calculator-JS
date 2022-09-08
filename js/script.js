@@ -36,3 +36,48 @@ function backspace(){
     let nilai = document.getElementById("textview").innerHTML;
     document.getElementById("textview").innerHTML = nilai.substring(0, nilai.length-1);
 }
+
+// on/off mode
+var checker = document.getElementById('checkme');
+var setBtn = document.querySelectorAll("#onOff button");
+var setShape_1 = document.querySelector('#onOff-shape .shape-1');
+var setShape_2 = document.querySelector('#onOff-shape .shape-2');
+var setBody = document.body;
+
+checker.onchange = function() {
+    for (let i = 0; i < setBtn.length; i++){
+        //button disable on/off
+        setBtn[i].disabled = !this.checked;
+        if(setBtn[i].disabled = !this.checked){
+            // body background color when off
+            setBody.classList.remove("enabled-body");
+
+            // clear text view when button off
+            document.getElementById("textview").innerHTML = "";
+
+            // btn off
+            setBtn[i].classList.remove("enableds");
+            setBtn[i].classList.add("disableds");
+            
+            // shape off
+            setShape_1.classList.remove("enableds-shape-1");
+            setShape_1.classList.add("disableds-shape-1");
+            setShape_2.classList.remove("enableds-shape-2");
+            setShape_2.classList.add("disableds-shape-2");
+            
+        }else{
+            // body background color when on
+            setBody.classList.add("enabled-body");
+
+            // btn on
+            setBtn[i].classList.remove("disableds");
+            setBtn[i].classList.add("enableds");
+
+            // shape on/off
+            setShape_1.classList.remove("disableds-shape-1");
+            setShape_1.classList.add("enableds-shape-1");
+            setShape_2.classList.remove("disableds-shape-2");
+            setShape_2.classList.add("enableds-shape-2");
+        }
+    }
+};
